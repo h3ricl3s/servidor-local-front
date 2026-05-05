@@ -7,6 +7,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export const RightSection = () => {
 
@@ -33,22 +34,31 @@ export const RightSection = () => {
     const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         // fetch API
-        fetch(
-            "http://localhost:8080/users/login",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password
-                })
-            }
-        ).then((response) => {
-            console.log(response.json());
-
+        const response = await fetch("http://localhost:8080/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            }),
         });
+
+        if (response.status === 200) {
+            toast.success("dados recebidos");
+
+            const responseData = await response.json()
+
+            console.log("dados recebidos: ", responseData)
+
+            if (typeof window !== "undefined") {
+                window.location.href = "/home";
+            }
+
+        } else {
+            toast.error("Email ou senha incorretos!")
+        }
     };
 
 
@@ -85,8 +95,8 @@ export const RightSection = () => {
                                 className="py-2 h-10 text-lg"></Input>
                         </div>
                         <Button
-                        onClick={handleLogin}
-                        className="bg-[#13A4EC] rounded-md text-white font-bold py-3 drop-shadow-lg drop-shadow-gray-200">
+                            onClick={handleLogin}
+                            className="bg-[#13A4EC] rounded-md text-white font-bold py-3 drop-shadow-lg drop-shadow-gray-200">
                             Login
                         </Button>
                     </div>

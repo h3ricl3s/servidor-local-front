@@ -7,11 +7,12 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { useState } from "react";
+import { toast,  } from "sonner";
 
 export const RegistroForm = () => {
     const [nome, setNome] = useState('');
-    const [numero_identificacao, setNumeroIdentificacao] = useState('');
-    const [data_nascimento, setDataNascimento] = useState('');
+    const [numeroIdentificacao, setNumeroIdentificacao] = useState('');
+    const [dataNascimento, setDataNascimento] = useState('');
     const [email, setEmail] = useState('');
     const [telefone, setTelefone] = useState('');
     const [pais, setPais] = useState('');
@@ -85,39 +86,39 @@ export const RegistroForm = () => {
 
     const handleRegistro = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        // fetch API
-        fetch(
-            "http://localhost:8080/users/create",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    nome: nome,
-                    numero_identificacao: numero_identificacao,
-                    dataNascimento: data_nascimento,
-                    email: email,
-                    telefone: telefone,
-                    pais: pais,
-                    localidade: localidade,
-                    password: password
-                })
-            }
-        ).then((response) => {
-            console.log(response.json());
 
+        // fetch API
+        const response = await fetch("http://localhost:8080/users/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nome: nome,
+                numero_identificacao: numeroIdentificacao,
+                data_nascimento: dataNascimento,
+                email: email,
+                telefone: telefone,
+                pais: pais,
+                localidade: localidade,
+                password: password,
+                role: "cliente",
+                enabled: true
+            }),
         });
+
+        if (response.status === 200) {
+            toast.success("Utilizador criado com sucesso")
+
+            if (typeof window !== "undefined") {
+                window.location.href = "/login";
+            }
+
+        } else {
+            toast.error("Não foi possível criar conta, tente novamente...")
+        }
     };
-    console.log({ nome: nome, 
-        numero_identificacao: numero_identificacao, 
-        data_nascimento: data_nascimento,
-        email: email,
-        telefone: telefone,
-        pais: pais,
-        localidade: localidade,
-        password: password
-    })
+    console.log({ nome: nome, numero_identificacao: numeroIdentificacao, data_nascimento: dataNascimento, email: email, telefone: telefone, pais: pais, localidade: localidade, password: password })
 
     return (
         <div className="w-1/2 flex flex-col justify-center">
@@ -141,7 +142,7 @@ export const RegistroForm = () => {
                         <div className="flex flex-col gap-2">
                             <Label>Número de identificação</Label>
                             <Input type="text"
-                                value={numero_identificacao}
+                                value={numeroIdentificacao}
                                 onChange={changeNumeroIdentificacao}
                                 placeholder="Your identification number"
                                 className="py-2 h-10 text-lg"></Input>
@@ -150,7 +151,7 @@ export const RegistroForm = () => {
                         <div className="flex flex-col gap-2">
                             <Label>Data de nascimento</Label>
                             <Input type="date"
-                                value={data_nascimento}
+                                value={dataNascimento}
                                 onChange={changeDataNascimento}
                                 className="py-2 h-10 text-lg"></Input>
                         </div>

@@ -8,6 +8,10 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
+import {setCookie} from "nookies"
+
+
+
 
 export const RightSection = () => {
 
@@ -48,7 +52,18 @@ export const RightSection = () => {
         if (response.status === 200) {
             toast.success("dados recebidos");
 
-            const responseData = await response.json()
+            const responseData = await response.json();
+
+        // salvar dados na cookie
+            setCookie(null, "token",responseData.data.token,{
+                maxAge: 60 * 60 * 24 * 7,
+                path: "/",
+            })
+
+               setCookie(null, "user",JSON.stringify(responseData.data.user),{
+                maxAge: 60 * 60 * 24 * 7,
+                path: "/",
+            })
 
             console.log("dados recebidos: ", responseData)
 

@@ -150,9 +150,10 @@ export const RegistroForm = () => {
 
                         <div className="flex flex-col gap-2">
                             <Label>Data de nascimento</Label>
-                            <Input type="date"
+                            <Input type="text"
                                 value={dataNascimento}
                                 onChange={changeDataNascimento}
+                                placeholder="YYYY-MM-DD"
                                 className="py-2 h-10 text-lg"></Input>
                         </div>
 

@@ -5,9 +5,7 @@ export default function AuthLayout({
 }) {
   return (
     <>
-      <div id="main-header" className="bg-gray-800 text-white p-4">
-        Cabecalho
-      </div>
+
       {children}
     </>
   );

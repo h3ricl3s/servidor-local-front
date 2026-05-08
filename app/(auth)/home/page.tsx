@@ -1,12 +1,39 @@
+import Navbar from "@/components/core/navbar";
 import { PedidoCard } from "@/components/core/pedido-card";
+import { Link } from "lucide-react";
+
+
+const pedidos = [
+  {
+    id: 1,
+    title: "reparos gerais",
+    description: "Preciso de um profissional para fazer reparos gerais.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2K7Vep76fG32bPuXH8oaBhTf8fUU5C7Y36w&s",
+    category: {
+      id: 1,
+      name: "reparos gerais",
+      icone: "🔧"
+    }
+  }
+]
+
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <>
+    <div className="min-h-screen bg-slate-50">
+      {/* NAVBAR */}
+      <Navbar>
+        <nav className="flex  px-4 sm:px-6 md:px-12 lg:px-10 py-4 items-center ">
+          <Link className="text-gray-600 hover:text-blue-500 transition-colors"
+            href="#">Home</Link>
+        </nav>
+        <div className="flex px-4 sm:px-6 md:px-12 lg:px-10 py-6">
+          {/* sedibar fixa a esquerda */}
+          <div></div>
+        </div>
+      </Navbar>
 
-      <h1 className="mb-6 text-3x1 front-bold ">
-        Home
-      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <PedidoCard
           title="reparos gerais"
@@ -69,8 +96,8 @@ export default function HomePage() {
             icone: "🔨"
           }}
         />
-
+    </div>    
       </div>
-    </div>
+    </>
   );
-}
+}    

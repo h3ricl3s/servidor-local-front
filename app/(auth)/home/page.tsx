@@ -1,6 +1,7 @@
 import Navbar from "@/components/core/navbar";
 import { PedidoCard } from "@/components/core/pedido-card";
-import { Link } from "lucide-react";
+import { BellIcon } from "lucide-react";
+import Link from "next/link";
 
 
 const pedidos = [
@@ -24,14 +25,23 @@ export default function HomePage() {
     <div className="min-h-screen bg-slate-50">
       {/* NAVBAR */}
       <Navbar>
-        <nav className="flex  px-4 sm:px-6 md:px-12 lg:px-10 py-4 items-center ">
-          <Link className="text-gray-600 hover:text-blue-500 transition-colors"
-            href="#">Home</Link>
-        </nav>
-        <div className="flex px-4 sm:px-6 md:px-12 lg:px-10 py-6">
-          {/* sedibar fixa a esquerda */}
-          <div></div>
-        </div>
+       <div className="flex items-center grap-4">
+             <div >
+               <input 
+               className="w-64  pl-11 bg-slate-50 border-none focus-visible:ring-1 focus-visible:ring-1 focus-visible:ring-blue-500 transitio-all"
+               placeholder="Search services..."
+               type="text"/>
+             </div>
+
+             <div className="p-2 hover:bg-slate-50 rounded-full transition-all active:scale-95">
+               <BellIcon />
+            </div>
+            <div>
+             f
+            </div>
+
+        
+           </div>
       </Navbar>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -3,7 +3,7 @@ import Cabeçalho from "@/components/core/Cabeçalho";
 import Footer from "@/components/core/footer";
 import Navbar from "@/components/core/navbar";
 import { PedidoCard } from "@/components/core/pedido-card";
-import Sedebar from "@/components/core/sedebar";
+import Sedebar from "@/components/budget/sedebar";
 import { BellIcon } from "lucide-react";
 import Link from "next/link";
 

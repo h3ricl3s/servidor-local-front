@@ -1,27 +1,18 @@
+
+import Cabeçalho from "@/components/core/Cabeçalho";
+import Footer from "@/components/core/footer";
 import Navbar from "@/components/core/navbar";
 import { PedidoCard } from "@/components/core/pedido-card";
+import Sedebar from "@/components/core/sedebar";
 import { BellIcon } from "lucide-react";
 import Link from "next/link";
 
 
-const pedidos = [
-  {
-    id: 1,
-    title: "reparos gerais",
-    description: "Preciso de um profissional para fazer reparos gerais.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2K7Vep76fG32bPuXH8oaBhTf8fUU5C7Y36w&s",
-    category: {
-      id: 1,
-      name: "reparos gerais",
-      icone: "🔧"
-    }
-  }
-]
 
 
-export default function HomePage() {
-  return (
-    <>
+export default function HomePage(){
+return (
+  <div className="bg-gray-100">
     <div className="min-h-screen bg-slate-50">
       {/* NAVBAR */}
       <Navbar>
@@ -39,12 +30,22 @@ export default function HomePage() {
             <div>
              f
             </div>
-
-        
-           </div>
+           </div >
       </Navbar>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div className="flex flex-1">
+        {/* SIDEBAR - Fixa na lateral esquerda */}
+        <aside className="w-64 bg-white border-r border-slate-200 p-6 hidden md:block">
+          <Sedebar />
+        </aside>
+        
+
+      <main className="p-21">
+      <div className="flex flex-col">
+        <Cabeçalho />
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-20 mx-20 place-content-center items-center">
         <PedidoCard
           title="reparos gerais"
           description="Preciso de um profissional para fazer reparos gerais."
@@ -105,9 +106,19 @@ export default function HomePage() {
             name: "Montagem de Moveis",
             icone: "🔨"
           }}
+
         />
-    </div>    
+    </div>   
+     
+       </main>
+      
       </div>
-    </>
-  );
-}    
+      <Footer />
+    </div> 
+
+</div>
+        );}
+
+  
+  
+

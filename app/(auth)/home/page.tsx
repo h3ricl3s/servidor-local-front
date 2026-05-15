@@ -266,7 +266,7 @@ export default function HomePage() {
             <Sedebar
               categories={categoryOptions}
               activeCategory={activeCategory}
-              onCategorySelect={setActiveCategory}
+              onCategorySelect={(categoryKey) => {setActiveCategory(categoryKey as CategoryFilter)}}
             />
           </aside>
 

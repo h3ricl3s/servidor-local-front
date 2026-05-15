@@ -8,7 +8,7 @@ type CategoryItem = {
 
 interface SedebarProps {
   categories: CategoryItem[];
-  activeCategory: string;
+  activeCategory:string;
   onCategorySelect: (categoryKey: string) => void;
 }
 
